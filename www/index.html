@@ -1,23 +1,133 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <title>Categorias</title>
+  <style>
+    body {
+      margin: 10px;
+      ;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      padding-top: 100px;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgb(0, 0, 0);
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    .modal-content {
+      background-color: #fefefe;
+      margin: auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 20%;
+    }
+
+    /* The Close Button */
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .classDivCategories {
+      display: flex;
+    }
+
+    .classDivCategories button {
+      width: 25%;
+      margin: 5px;
+    }
+
+    .classDivCategories li {
+      width: 50%;
+      margin: 5px;
+    }
+
+    #tablaCategories {
+      border: 2px solid black;
+      border-radius: 5%;
+      width: 20%;
+      margin: 20px;
+      padding: 20px;
+    }
+  </style>
 </head>
+
 <body>
   <main>
-    <ul></ul>
+    <button class="btn btn-success" onclick="modalAnadirCategoria()">Añadir Categoria</button>
+    <br>
+    <br>
+    <h1 class="display-3">Listado Categorias</h1>
+    <ul id="tablaCategories"></ul>
   </main>
+  </div>
+  <div id="modalAnadirCategoria" class="modal">
+    <form name="data">
+      <div class="modal-content">
+        <span id="cruzModalCategorias" class="close">&times;</span>
+        <br>
+        <h1 class="display-4">Añadir Categoria</h1>
+        <br>
+        <p>Nombre
+          <br>
+          <input type="text" class="form-control" id="textoAnadirCategoria">
+          <br>
+          <br>
+          <input type="button" class="btn btn-primary" value="Añadir" onclick="anadirCategoria()">
+        </p>
+    </form>
+    <form name="dataSites">
+    </form>
+  </div>
+  </div>
   <script>
     let drawData = (data) => {
       data.forEach(category => {
         let parent = document.getElementsByTagName('ul')[0]
         let child = document.createElement('li')
-        // child.innerText = JSON.stringify(category)
+        let abril = document.createElement('div')
+        let button = document.createElement('button')
+        let buttonMostrarSites = document.createElement('button')
+        button.innerHTML = "Eliminar";
+        abril.className = 'classDivCategories';
+        buttonMostrarSites.className = 'btn btn-primary';
+        button.className = 'btn btn-danger';
+        buttonMostrarSites.innerHTML = "Mostrar Sites";
+        button.onclick = function () {
+          eliminarCategoria(category.id)
+        };
+        buttonMostrarSites.onclick = function () {
+          window.location.href = "site.html?categoryId=" + category.id;
+        };
         child.innerText = category.name
-        parent.appendChild(child)
+        abril.appendChild(child)
+        abril.appendChild(buttonMostrarSites)
+        abril.appendChild(button)
+        parent.appendChild(abril)
       })
     }
 
@@ -26,4 +136,6 @@
       .then(data => drawData(data))
   </script>
 </body>
+<script src="main.js"></script>
+
 </html>

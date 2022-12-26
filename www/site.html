@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+  <title>Sites</title>
+  <style>
+    body {
+      margin: 10px;
+      ;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      z-index: 1;
+      padding-top: 100px;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgb(0, 0, 0);
+      background-color: rgba(0, 0, 0, 0.4);
+    }
+
+    .modal-content {
+      background-color: #fefefe;
+      margin: auto;
+      padding: 20px;
+      border: 1px solid #888;
+      width: 30%;
+    }
+
+    /* The Close Button */
+    .close {
+      color: #aaa;
+      float: right;
+      font-size: 28px;
+      font-weight: bold;
+    }
+
+    .close:hover,
+    .close:focus {
+      color: black;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .classDivCategories {
+      display: flex;
+    }
+
+    .classDivCategories button {
+      margin: 5px;
+    }
+
+    .classDivCategories li {
+      margin: 5px;
+    }
+
+    #botonGenerarContraseña {
+      margin: 5px;
+
+    }
+
+#tablaSites {
+  border: 2px solid black;
+  border-radius: 5%;
+  width: 20%;
+  margin: 20px;
+  padding: 20px;
+}
+
+
+.classDivSites {
+      display: flex;
+    }
+
+    .classDivSites button {
+      width: 25%;
+      margin: 5px;
+    }
+
+    .classDivSites li {
+      width: 50%;
+      margin: 5px;
+    }
+
+
+  </style>
+</head>
+
+<body>
+  <main>
+    <button class="btn btn-success" onclick="modalAnadirSite()">Añadir Site</button>
+    <br>
+    <br>
+    <h1 class="display-3">Listado Sites</h1>
+    <ul id="tablaSites"></ul>
+    <form name="dataSites">
+    </form>
+  </main>
+  </div>
+  <div id="modalAnadirSite" class="modal">
+    <form name="data">
+      <div class="modal-content">
+        <span id="cruzModalSites" class="close">&times;</span>
+        <p>Nombre
+          <input type="text" class="form-control" id="nombreAnadirSite">
+          <br>
+        <p>Usuario
+          <input type="text" class="form-control" id="usuarioAnadirSite">
+          <br>
+        <p>Contraseña
+          <input type="text" class="form-control" id="contraseñaAnadirSite">
+          <br><button id="botonGenerarContraseña" type="button" class="btn btn-success"
+            onclick="generarContraseña()">Generar Contraseña</button>
+          <a></a>
+          <br>
+          <br>
+          <input type="button"  class="btn btn-primary" value="Añadir" onclick="anadirSite()">
+        </p>
+    </form>
+    <form name="dataSites">
+    </form>
+  </div>
+  <script>
+    let drawDataSites = (dataSites) => {
+      dataSites.forEach(site => {
+        let divSite = document.createElement('div')
+        let parentSite = document.getElementsByTagName('ul')[0]
+        let childSite = document.createElement('li')
+        let buttonEliminarSite = document.createElement('button')
+        divSite.className = 'classDivSites';
+        buttonEliminarSite.innerHTML = "Eliminar";
+        buttonEliminarSite.onclick = function () {
+          eliminarSite(site.id)
+        };
+        childSite.innerText = site.name
+        buttonEliminarSite.className = 'btn btn-danger';
+        divSite.appendChild(childSite)
+        divSite.appendChild(buttonEliminarSite)
+        parentSite.appendChild(divSite)
+      }
+      )
+    }
+    const queryString = window.location.search;
+    const params = new URLSearchParams(queryString);
+    let categoryId = params.get("categoryId");
+    fetch("http://localhost:3000/categories/" + categoryId)
+      .then(res => res.json())
+      .then(data => drawDataSites(data))
+  </script>
+</body>
+<script src="main.js"></script>
+
+</html>
