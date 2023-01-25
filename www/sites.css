@@ -1,0 +1,86 @@
+body {
+    margin: 10px;
+    ;
+  }
+
+  .modal {
+    display: none;
+    position: fixed;
+    z-index: 1;
+    padding-top: 100px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgb(0, 0, 0);
+    background-color: rgba(0, 0, 0, 0.4);
+  }
+
+  .modal-content {
+    background-color: #fefefe;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #888;
+    width: 30%;
+  }
+
+  /* The Close Button */
+  .close {
+    color: #aaa;
+    float: right;
+    font-size: 28px;
+    font-weight: bold;
+  }
+
+  .close:hover,
+  .close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+  }
+
+  .classDivCategories {
+    display: flex;
+  }
+
+  .classDivCategories button {
+    margin: 5px;
+  }
+
+  .classDivCategories li {
+    margin: 5px;
+  }
+
+  #botonGenerarContraseña {
+    margin: 5px;
+
+  }
+
+#tablaSites {
+border: 2px solid black;
+border-radius: 5%;
+width: 45%;
+margin: 20px;
+padding: 20px;
+}
+
+
+.classDivSites {
+    display: flex;
+  }
+
+  .classDivSites button {
+    width: 25%;
+    margin: 5px;
+  }
+
+  .classDivSites li {
+    width: 50%;
+    list-style: none;
+    margin: 5px;
+  }
+
+.titulosSite{
+    margin: 2em;
+}

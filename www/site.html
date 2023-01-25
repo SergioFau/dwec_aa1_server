@@ -6,102 +6,21 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+  <link rel="stylesheet" href="sites.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.1/jquery.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
   <title>Sites</title>
-  <style>
-    body {
-      margin: 10px;
-      ;
-    }
-
-    .modal {
-      display: none;
-      position: fixed;
-      z-index: 1;
-      padding-top: 100px;
-      left: 0;
-      top: 0;
-      width: 100%;
-      height: 100%;
-      overflow: auto;
-      background-color: rgb(0, 0, 0);
-      background-color: rgba(0, 0, 0, 0.4);
-    }
-
-    .modal-content {
-      background-color: #fefefe;
-      margin: auto;
-      padding: 20px;
-      border: 1px solid #888;
-      width: 30%;
-    }
-
-    /* The Close Button */
-    .close {
-      color: #aaa;
-      float: right;
-      font-size: 28px;
-      font-weight: bold;
-    }
-
-    .close:hover,
-    .close:focus {
-      color: black;
-      text-decoration: none;
-      cursor: pointer;
-    }
-
-    .classDivCategories {
-      display: flex;
-    }
-
-    .classDivCategories button {
-      margin: 5px;
-    }
-
-    .classDivCategories li {
-      margin: 5px;
-    }
-
-    #botonGenerarContraseña {
-      margin: 5px;
-
-    }
-
-#tablaSites {
-  border: 2px solid black;
-  border-radius: 5%;
-  width: 20%;
-  margin: 20px;
-  padding: 20px;
-}
-
-
-.classDivSites {
-      display: flex;
-    }
-
-    .classDivSites button {
-      width: 25%;
-      margin: 5px;
-    }
-
-    .classDivSites li {
-      width: 50%;
-      margin: 5px;
-    }
-
-
-  </style>
 </head>
 
 <body>
   <main>
+    <a class="btn btn-primary" href="index.html">Volver</a>
     <button class="btn btn-success" onclick="modalAnadirSite()">Añadir Site</button>
     <br>
     <br>
     <h1 class="display-3">Listado Sites</h1>
+    <div style="display: flex;">
+    </div>
     <ul id="tablaSites"></ul>
     <form name="dataSites">
     </form>
@@ -132,10 +51,30 @@
   </div>
   <script>
     let drawDataSites = (dataSites) => {
+      let tituloDiv = document.createElement('div')
+      tituloDiv.className = 'classDivSites';
+      let titulo1 = document.createElement('li')
+      let titulo2 = document.createElement('li')
+      let titulo3 = document.createElement('li')
+      let titulo4 = document.createElement('button')
+      titulo4.style.visibility = "hidden";
+      let hr = document.createElement('hr')
+      titulo1.innerHTML = "Nombre";
+      titulo2.innerHTML = "Usuario";
+      titulo3.innerHTML = "Contraseña";
+      titulo4.innerHTML = "";
+      let parentSite = document.getElementsByTagName('ul')[0]
+      tituloDiv.appendChild(titulo1)
+      tituloDiv.appendChild(titulo2)
+      tituloDiv.appendChild(titulo3)
+      tituloDiv.appendChild(titulo4)
+      parentSite.appendChild(tituloDiv)
+      parentSite.appendChild(hr)
       dataSites.forEach(site => {
         let divSite = document.createElement('div')
-        let parentSite = document.getElementsByTagName('ul')[0]
         let childSite = document.createElement('li')
+        let childSite2 = document.createElement('li')
+        let childSite3 = document.createElement('li')
         let buttonEliminarSite = document.createElement('button')
         divSite.className = 'classDivSites';
         buttonEliminarSite.innerHTML = "Eliminar";
@@ -143,8 +82,12 @@
           eliminarSite(site.id)
         };
         childSite.innerText = site.name
+        childSite2.innerText = site.user
+        childSite3.innerText = site.password
         buttonEliminarSite.className = 'btn btn-danger';
         divSite.appendChild(childSite)
+        divSite.appendChild(childSite2)
+        divSite.appendChild(childSite3)
         divSite.appendChild(buttonEliminarSite)
         parentSite.appendChild(divSite)
       }

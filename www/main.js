@@ -4,7 +4,20 @@ var modalSite = document.getElementById("modalAnadirSite");
 function modalAnadirCategoria() {
     modal.style.display = "block";
 }
-
+function mostrarIconos() {
+    var iconos = document.getElementsByClassName("icono");
+    var botonIconos = document.getElementById("botonIconos");
+    for (let i = 0; i < iconos.length; i++) {
+        if(iconos[i].style.visibility == "visible"){
+            iconos[i].style.visibility = "hidden";
+            botonIconos.innerHTML = "Mostrar Iconos";
+        }else if( iconos[i].style.visibility == "" || iconos[i].style.visibility == "hidden"){
+                iconos[i].style.visibility = "visible";
+                botonIconos.innerHTML = "Ocultar Iconos";
+            }
+        
+    } 
+}
 function modalAnadirSite() {
     modalSite.style.display = "block";
 }
@@ -15,7 +28,7 @@ if (document.getElementById("cruzModalCategorias") != null) {
         document.getElementById("textoAnadirCategoria").value = "";
     }
 }
-if (document.getElementById("cruzModalCategorias") != null) {
+if (document.getElementById("cruzModalSites") != null) {
     document.getElementById("cruzModalSites").onclick = function () {
         modalSite.style.display = "none";
         document.getElementById("nombreAnadirSite").value = "";
@@ -43,7 +56,7 @@ window.onclick = function (event) {
 
 function anadirCategoria() {
     var text = document.getElementById("textoAnadirCategoria").value;
-    if (text != "") {
+    if (text != "" && text.trim().length > 5) {
         fetch("http://localhost:3000/categories", {
             method: 'POST',
             headers: {
@@ -56,7 +69,8 @@ function anadirCategoria() {
         location.reload();
         return false;
     } else {
-        alert("Introduce un nombre")
+        alert("Introduce un nombre con más de 5 caracteres");
+        document.getElementById("textoAnadirCategoria").style.border = "1px solid red";
     }
 }
 
@@ -79,7 +93,7 @@ function anadirSite() {
     var nombre = document.getElementById("nombreAnadirSite").value;
     var usuario = document.getElementById("usuarioAnadirSite").value;
     var contraseña = document.getElementById("contraseñaAnadirSite").value;
-    if (nombre != "" || usuario != "" || contraseña != "") {
+    if ((nombre != "" || usuario != "" || contraseña != "") && (nombre.trim().length > 7 && usuario.trim().length > 7 && contraseña.trim().length > 7)) {
         fetch("http://localhost:3000/categories/" + categoryId, {
             method: 'POST',
             headers: {
@@ -98,7 +112,12 @@ function anadirSite() {
         location.reload();
         return false;
     } else {
-        alert("Introduce los todos campos")
+        alert("Introduce los todos campos con minimo 8 caracteres")
+        if(nombre.trim().length < 8) document.getElementById("nombreAnadirSite").style.border = "1px solid red";
+        if(usuario.trim().length < 8) document.getElementById("usuarioAnadirSite").style.border = "1px solid red";
+        if(contraseña.trim().length < 8) document.getElementById("contraseñaAnadirSite").style.border = "1px solid red";
+
+
     }
 }
 
